@@ -28,6 +28,7 @@ target_link_libraries(overlaybd_image_lib
   ${OPENSSL_SSL_LIBRARY}
   ${OPENSSL_CRYPTO_LIBRARY}
   ${AIO_LIBRARIES}
+  ${CAP_LIBRARIES}
 )
 
 add_executable(overlaybd-tcmu
@@ -49,6 +50,7 @@ target_link_libraries(overlaybd-tcmu
   ${OPENSSL_SSL_LIBRARY}
   ${OPENSSL_CRYPTO_LIBRARY}
   ${AIO_LIBRARIES}
+  ${CAP_LIBRARIES}
 )
 
 install(TARGETS overlaybd-tcmu DESTINATION /opt/overlaybd/bin)

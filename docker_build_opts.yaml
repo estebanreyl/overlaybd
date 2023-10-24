@@ -1,0 +1,3 @@
+overlaybd_ver_commit: 4afecd185b60cf5afb344ea404bd9ad9129dd6e5
+# v1.0.2. Note: When updating this version number also update the version in databases
+# if the version change will result in a change in the output digests.
