@@ -2,6 +2,7 @@ find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(aio REQUIRED)
 find_package(rapidjson REQUIRED)
+find_package(cap REQUIRED)
 
 link_libraries(rt pthread resolv)
 

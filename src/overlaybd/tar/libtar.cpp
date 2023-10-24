@@ -41,9 +41,8 @@ int UnTar::set_file_perms(const char *filename) {
     struct timeval tv[2];
     tv[0].tv_sec = tv[1].tv_sec = header.get_mtime();
     tv[0].tv_usec = tv[1].tv_usec = 0;
-    CapabilitiesChecker caps;
     /* change owner/group */
-    if (geteuid() == 0 || caps.hasCapability(CAP_CHOWN)) {
+    if (geteuid() == 0 || CapabilitiesChecker::HasCapability(CAP_CHOWN)) {
         if (fs->lchown(filename, uid, gid) == -1) {
             LOG_ERRNO_RETURN(0, -1, "lchown failed, filename `, uid `, gid `", filename, uid, gid);
         }
@@ -76,8 +75,7 @@ int UnTar::set_file_perms(const char *filename) {
 
 ssize_t UnTar::dump_tar_headers(photon::fs::IFile *as) {
     ssize_t count = 0;
-    CapabilitiesChecker caps;
-    while (read_header(as) == 0 || caps.hasCapability(CAP_MKNOD)) {
+    while (read_header(as) == 0 || CapabilitiesChecker::HasCapability(CAP_MKNOD)) {
         if (TH_ISREG(header)) {
             auto size = get_size();
             file->lseek(((size + T_BLOCKSIZE - 1) / T_BLOCKSIZE) * T_BLOCKSIZE, SEEK_CUR); // skip size

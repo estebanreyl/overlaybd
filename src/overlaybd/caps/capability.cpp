@@ -7,7 +7,7 @@ CapabilitiesChecker::CapabilitiesChecker() {
 CapabilitiesChecker::~CapabilitiesChecker() {
 }
 
-bool CapabilitiesChecker::hasCapability(cap_value_t capability) {
+bool CapabilitiesChecker::HasCapability(cap_value_t capability) {
     // Get the process ID
     pid_t pid = getpid();
 

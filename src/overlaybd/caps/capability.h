@@ -24,7 +24,7 @@ class CapabilitiesChecker {
 public:
     CapabilitiesChecker();
     ~CapabilitiesChecker();
-    bool hasCapability(cap_value_t capability);
+    static bool HasCapability(cap_value_t capability);
 };
 
 #endif // CAPABILITIES_CHECKER_H
