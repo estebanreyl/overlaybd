@@ -75,7 +75,7 @@ int UnTar::set_file_perms(const char *filename) {
 
 ssize_t UnTar::dump_tar_headers(photon::fs::IFile *as) {
     ssize_t count = 0;
-    while (read_header(as) == 0 || CapabilitiesChecker::HasCapability(CAP_MKNOD)) {
+    while (read_header(as) == 0) {
         if (TH_ISREG(header)) {
             auto size = get_size();
             file->lseek(((size + T_BLOCKSIZE - 1) / T_BLOCKSIZE) * T_BLOCKSIZE, SEEK_CUR); // skip size
@@ -168,7 +168,7 @@ int UnTar::extract_file() {
     else if (TH_ISSYM(header))
         i = extract_symlink(filename);
     else if (TH_ISCHR(header) || TH_ISBLK(header)) {
-        if (geteuid() == 0) {
+        if (geteuid() == 0 || CapabilitiesChecker::HasCapability(CAP_MKNOD)) {
             i = extract_block_char_fifo(filename);
         } else {
             LOG_WARN("file ` ignored: skip for user namespace", filename);
